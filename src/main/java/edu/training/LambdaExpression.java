@@ -2,13 +2,7 @@ package edu.training;
 
 
 import java.util.List;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
-import java.util.function.IntBinaryOperator;
-import java.util.function.IntPredicate;
-import java.util.function.IntUnaryOperator;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public class LambdaExpression {
 
@@ -20,7 +14,7 @@ public class LambdaExpression {
      * - true if string length is 6 of more
      */
     public static Predicate<String> stringLengthPredicate() {
-        throw new UnsupportedOperationException();  //need to implement
+        return s -> s.length() > 5;
     }
 
     /**
@@ -31,7 +25,7 @@ public class LambdaExpression {
      * - true if number is even
      */
     public static IntPredicate evenNumberPredicate() {
-        throw new UnsupportedOperationException(); //need to implement
+        return i -> i % 2 == 0;
     }
 
     /**
@@ -40,7 +34,7 @@ public class LambdaExpression {
      * @return String to Integer function
      */
     public static Function<String, Integer> stringLengthFunction() {
-        throw new UnsupportedOperationException(); //need to implement
+        return s -> s.length();
     }
 
     /**
@@ -49,7 +43,7 @@ public class LambdaExpression {
      * @return Integer to string function
      */
     public static Function<Integer, String> toStringFunction() {
-        throw new UnsupportedOperationException(); //need to implement
+        return String::valueOf;
     }
 
     /**
@@ -58,7 +52,7 @@ public class LambdaExpression {
      * @return Supplier
      */
     public static Supplier<String> javaSupplier() {
-        throw new UnsupportedOperationException(); //need to implement
+        return () -> "Java";
     }
 
     /**
@@ -67,7 +61,7 @@ public class LambdaExpression {
      * @return Supplier
      */
     public static Supplier<List<String>> collectionSupplier() {
-        throw new UnsupportedOperationException(); //need to implement
+        return () -> List.of("one", "two", "three");
     }
 
     /**
@@ -76,24 +70,24 @@ public class LambdaExpression {
      * @return IntUnaryOperator
      */
     public static IntUnaryOperator intSquare() {
-        throw new UnsupportedOperationException(); //need to implement
+        return i -> i * i;
     }
 
     /**
      * Implement BinaryOperator that returns multiplication of two input values
+     *
      * @return IntBinaryOperator
      */
     public static IntBinaryOperator multiplication() {
-        throw new UnsupportedOperationException(); //need to implement
+        return (x, y) -> x * y;
     }
 
     /**
      * Implement BiPredicate that check if the result of multiplication of two Integers is even number
+     *
      * @return BiPredicate
      */
     public static BiPredicate<Integer, Integer> multiplicationResultIsEven() {
-        throw new UnsupportedOperationException();
+        return (x, y) -> (x * y) % 2 == 0;
     }
-
-
 }
