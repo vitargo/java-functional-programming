@@ -3,44 +3,72 @@ package edu.training;
 import edu.training.domain.Company;
 import edu.training.domain.Employee;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StreamApi {
 
     public static List<String> getEmployeeNames(List<Employee> employees) {
-        throw new UnsupportedOperationException();
+        return employees.stream()
+                .map(Employee::getName)
+                .collect(Collectors.toList());
     }
 
     public static List<String> getEmployeeNamesStartedFrom(List<Employee> employees, String strStart) {
-        throw new UnsupportedOperationException();
+        return employees.stream()
+                .filter(employee -> employee.getName().startsWith(strStart))
+                .map(Employee::getName)
+                .collect(Collectors.toList());
+
     }
 
     public static List<String> getEmployeeNamesSorted(List<Employee> employees) {
-        throw new UnsupportedOperationException();
+        return employees.stream()
+                .map(Employee::getName)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public static List<Employee> getEmployeeJoinCompanyIn2019(List<Employee> employees) {
-        throw new UnsupportedOperationException();
+        return employees.stream()
+                .filter(employee -> employee.getDateOfJoin().getYear() == 2019)
+                .collect(Collectors.toList());
     }
 
     public static List<Employee> getEmployeesWithJava(List<Employee> employees) {
-        throw new UnsupportedOperationException();
+        return employees.stream()
+                .filter(employee -> employee.getSkills().contains(Employee.Skill.JAVA))
+                .collect(Collectors.toList());
     }
 
     public static List<Employee> getEmployeesFrom3KBlock(List<Employee> employees) {
-        throw new UnsupportedOperationException();
+        return employees.stream()
+                .filter(employee -> employee.getWorkingBlock().equals("3K"))
+                .collect(Collectors.toList());
     }
 
     public static List<Employee> getEmployeesOlderThan25Years(List<Employee> employees) {
-        throw new UnsupportedOperationException();
+        return employees.stream()
+                .filter(employee -> Period.between(employee.getDateOfBirth(), LocalDate.now()).getYears() > 25)
+                .collect(Collectors.toList());
     }
 
     public static List<String> getEmployeeNamesWithTop3Salary(List<Employee> employees) {
-        throw new UnsupportedOperationException();
+        return employees.stream()
+                .sorted(Comparator.comparing(Employee::getSalary).reversed())
+                .map(Employee::getName)
+                .limit(3)
+                .collect(Collectors.toList());
     }
 
     public static List<Employee> getEmployeeHiredInYearSortedByNames(List<Employee> employees, int year) {
-        throw new UnsupportedOperationException();
+        return employees.stream()
+                .filter(employee -> employee.getDateOfJoin().getYear() == year)
+                .sorted(Comparator.comparing(Employee::getName))
+                .collect(Collectors.toList());
     }
 
     public static List<String> getUniqueEmployeeNames(List<Employee> employees) {
@@ -74,5 +102,4 @@ public class StreamApi {
     public static long calculateMaxSalaryOnMarket(List<Company> companies) {
         throw new UnsupportedOperationException();
     }
-
 }
